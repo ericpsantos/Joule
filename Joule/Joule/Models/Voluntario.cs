@@ -6,22 +6,19 @@ using System.Web;
 
 namespace Joule.Models
 {
-    public class Voluntario
+    public class Voluntario : Pessoa
     {
-        [JsonProperty(PropertyName = "id")]
-        public string Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Country { get; set; }
-        public string[] Interests { get; set; }
+        public double YearsOfExperience { get; set; }
+        public string CurrentEmployer { get; set; }
+        public string CurrentPosition { get; set; }
+        public string[] PastEmployers { get; set; }
+        public string[] WorkSegments { get; set; }
+        public string[] WorkAreas { get; set; }
+        public string Degree { get; set; }
+        public string LinkedInProfile { get; set; }
+        public string[] Programs { get; set; }
         public string CurrentProfile { get; set; }
         public string About { get; set; }
-        public DateTime CreatedDateTime { get; set; }
-        public DateTime UpdatedDateTime { get; set; }
+        
     }
 }
