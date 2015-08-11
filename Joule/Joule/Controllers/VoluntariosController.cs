@@ -12,10 +12,11 @@ namespace Joule.Controllers
 {
     public class VoluntariosController : ApiController
     {
+        VoluntarioRepository voluntarioRepository = new VoluntarioRepository();
         // GET: api/Voluntario
         public IEnumerable<Voluntario> Get()
         {
-            var voluntarios = DocumentDBRepository<Voluntario>.GetAllVoluntarios();
+            var voluntarios = voluntarioRepository.GetAll();
             //return new Voluntario[] { new Voluntario { Name = "Eric" }, new Voluntario { Name = "Fernando" } };
             return voluntarios;
         }
@@ -25,7 +26,7 @@ namespace Joule.Controllers
         {
             try
             {
-                Voluntario voluntario = DocumentDBRepository<Voluntario>.GetVoluntario(x => x.Id == id).FirstOrDefault();
+                Voluntario voluntario = DocumentDBRepository<Voluntario>.Get(x => x.Id == id).FirstOrDefault();
 
                 return Request.CreateResponse<Voluntario>(HttpStatusCode.OK, voluntario);
             }
@@ -38,6 +39,7 @@ namespace Joule.Controllers
         // POST: api/Voluntario
         public async Task<HttpResponseMessage> Post([FromBody]Voluntario voluntario)
         {
+            voluntario.Type = "Voluntario";
             try
             {
                 await DocumentDBRepository<Voluntario>.CreateItemAsync(voluntario);
@@ -53,6 +55,7 @@ namespace Joule.Controllers
         // PUT: api/Voluntario/5
         public async Task<HttpResponseMessage> Put(string id, [FromBody]Voluntario voluntario)
         {
+            voluntario.Type = "Voluntario";
             try
             {
                 await DocumentDBRepository<Voluntario>.UpdateItemAsync(id, voluntario);

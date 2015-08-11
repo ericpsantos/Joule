@@ -28,6 +28,11 @@ namespace Joule.Repositories
             return db;
         }
 
+        internal static object GetUsuario(Func<object, bool> p)
+        {
+            throw new NotImplementedException();
+        }
+
         //Use the DocumentCollection if it exists, if not create a new Collection
         private static DocumentCollection ReadOrCreateCollection(string databaseLink)
         {
@@ -127,16 +132,10 @@ namespace Joule.Repositories
             }
         }
 
-        public static IEnumerable<T> GetVoluntario(Expression<Func<T, bool>> predicate)
+        public static IEnumerable<T> Get(Expression<Func<T, bool>> predicate)
         {
             return Client.CreateDocumentQuery<T>(Collection.DocumentsLink)
                 .Where(predicate)
-                .AsEnumerable();
-        }
-
-        public static IEnumerable<T> GetAllVoluntarios()
-        {
-            return Client.CreateDocumentQuery<T>(Collection.DocumentsLink)
                 .AsEnumerable();
         }
 

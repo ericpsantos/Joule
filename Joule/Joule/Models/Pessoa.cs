@@ -19,6 +19,7 @@ namespace Joule.Models
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
+        public string Type { get; set; }
         public DateTime CreatedDateTime { get; set; }
         public DateTime UpdatedDateTime { get; set; }
     }
