@@ -1,4 +1,5 @@
 ﻿using Joule.Models;
+using Joule.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,9 @@ namespace Joule.Controllers
         // GET: api/Voluntario
         public IEnumerable<Voluntario> Get()
         {
-            return new Voluntario[] { new Voluntario { Name = "Eric" }, new Voluntario { Name = "Fernando" } };
+            var voluntarios = DocumentDBRepository<Voluntario>.GetAllVoluntarios();
+            //return new Voluntario[] { new Voluntario { Name = "Eric" }, new Voluntario { Name = "Fernando" } };
+            return voluntarios;
         }
 
         // GET: api/Voluntario/5
