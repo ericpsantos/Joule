@@ -127,7 +127,7 @@ namespace Joule.Repositories
             }
         }
 
-        public static IEnumerable<T> GetVoluntarios(Expression<Func<T, bool>> predicate)
+        public static IEnumerable<T> GetVoluntario(Expression<Func<T, bool>> predicate)
         {
             return Client.CreateDocumentQuery<T>(Collection.DocumentsLink)
                 .Where(predicate)
@@ -149,6 +149,12 @@ namespace Joule.Repositories
         {
             Document doc = GetDocument(id);
             return await Client.ReplaceDocumentAsync(doc.SelfLink, item);
+        }
+
+        public static async Task<Document> DeleteItemAsync(string id)
+        {
+            Document doc = GetDocument(id);
+            return await Client.DeleteDocumentAsync(doc.SelfLink);
         }
 
         private static Document GetDocument(string id)

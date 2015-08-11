@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Joule.Controllers
@@ -20,24 +21,63 @@ namespace Joule.Controllers
         }
 
         // GET: api/Voluntario/5
-        public string Get(int id)
+        public HttpResponseMessage Get(string id)
         {
-            return "value";
+            try
+            {
+                Voluntario voluntario = DocumentDBRepository<Voluntario>.GetVoluntario(x => x.Id == id).FirstOrDefault();
+
+                return Request.CreateResponse<Voluntario>(HttpStatusCode.OK, voluntario);
+            }
+            catch
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Not Found");
+            }            
         }
 
         // POST: api/Voluntario
-        public void Post([FromBody]string value)
+        public async Task<HttpResponseMessage> Post([FromBody]Voluntario voluntario)
         {
+            try
+            {
+                await DocumentDBRepository<Voluntario>.CreateItemAsync(voluntario);
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.NoContent);
         }
 
         // PUT: api/Voluntario/5
-        public void Put(int id, [FromBody]string value)
+        public async Task<HttpResponseMessage> Put(string id, [FromBody]Voluntario voluntario)
         {
+            try
+            {
+                await DocumentDBRepository<Voluntario>.UpdateItemAsync(id, voluntario);
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.NoContent);
         }
 
         // DELETE: api/Voluntario/5
-        public void Delete(int id)
+        public async Task<HttpResponseMessage> Delete(string id)
         {
+            try
+            {
+                await DocumentDBRepository<Voluntario>.DeleteItemAsync(id);
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.NoContent);
         }
     }
 }
