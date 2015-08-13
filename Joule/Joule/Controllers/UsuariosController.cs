@@ -49,6 +49,16 @@ namespace Joule.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, e);
             }
 
+            SendGridService sendGrid = new SendGridService();
+
+            try
+            {
+                sendGrid.SendWelcomeEmail(usuario.Email);
+            } catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.ServiceUnavailable, e.Message);
+            }
+
             return Request.CreateResponse(HttpStatusCode.NoContent);
         }
 
