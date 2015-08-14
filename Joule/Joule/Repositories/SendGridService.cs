@@ -127,9 +127,9 @@ namespace Joule.Repositories
             <td>{9}</td><td>{10}</td><td>{11}</td><td>{12}</td><td>{13}</td>
             <td>{14}</td><td>{15}</td><td>{16}</td></tr></table>", voluntario.FirstName, voluntario.LastName, voluntario.Email,
             voluntario.PhoneNumber, voluntario.Address, voluntario.City,
-            voluntario.State, voluntario.Country, voluntario.Programs,
+            voluntario.State, voluntario.Country, voluntario.Programs.ToArray(),
             voluntario.YearsOfExperience, voluntario.CurrentEmployer, voluntario.CurrentPosition,
-            voluntario.PastEmployers, voluntario.WorkSegments, voluntario.WorkAreas, voluntario.Degree, voluntario.LinkedInProfile);
+            voluntario.PastEmployers, voluntario.WorkSegments.ToArray(), voluntario.WorkAreas.ToArray(), voluntario.Degree, voluntario.LinkedInProfile);
 
             this.SendEmail(myMessage);
         }
@@ -161,7 +161,7 @@ namespace Joule.Repositories
             <td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td>
             <td>{9}</td><td>{10}</td></tr></table>", usuario.FirstName, usuario.LastName, usuario.Email,
             usuario.PhoneNumber, usuario.Address, usuario.City,
-            usuario.State, usuario.Country, usuario.Programs,
+            usuario.State, usuario.Country, usuario.Programs.ToArray(),
             usuario.CurrentProfile, usuario.About);
 
             this.SendEmail(myMessage);
@@ -170,11 +170,11 @@ namespace Joule.Repositories
         private void SendEmail(SendGridMessage myMessage)
         {
             // Create network credentials to access your SendGrid account
-            //var username = "azure_ba4de69f131861e607d1ca878a4a2312@azure.com";
-            //var pswd = "";
+            var username = "azure_ba4de69f131861e607d1ca878a4a2312@azure.com";
+            var pswd = "02uchtdorf";
 
-            var username = System.Environment.GetEnvironmentVariable("SENDGRID_USER");
-            var pswd = System.Environment.GetEnvironmentVariable("SENDGRID_PASS");
+            //var username = System.Environment.GetEnvironmentVariable("SENDGRID_USER");
+            //var pswd = System.Environment.GetEnvironmentVariable("SENDGRID_PASS");
 
             if (username == null || pswd == null)
             {
