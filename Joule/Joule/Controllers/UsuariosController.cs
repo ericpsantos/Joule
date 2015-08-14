@@ -40,6 +40,7 @@ namespace Joule.Controllers
         public async Task<HttpResponseMessage> Post([FromBody]Usuario usuario)
         {
             usuario.Type = "Usuario";
+            usuario.CreatedDateTime = DateTime.UtcNow;
             try
             {
                 await DocumentDBRepository<Usuario>.CreateItemAsync(usuario);
@@ -66,6 +67,7 @@ namespace Joule.Controllers
         public async Task<HttpResponseMessage> Put(string id, [FromBody]Usuario usuario)
         {
             usuario.Type = "Usuario";
+            usuario.UpdatedDateTime = DateTime.UtcNow;
             try
             {
                 await DocumentDBRepository<Usuario>.UpdateItemAsync(id, usuario);
