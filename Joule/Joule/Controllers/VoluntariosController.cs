@@ -53,7 +53,7 @@ namespace Joule.Controllers
 
             try
             {
-                sendGrid.SendVoluntarioWelcomeEmail(voluntario.Email);
+                sendGrid.SendVoluntarioWelcomeEmail(voluntario);
             }
             catch (Exception e)
             {

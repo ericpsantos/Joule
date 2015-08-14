@@ -53,7 +53,7 @@ namespace Joule.Controllers
 
             try
             {
-                sendGrid.SendWelcomeEmail(usuario.Email);
+                sendGrid.SendWelcomeEmail(usuario);
             } catch (Exception e)
             {
                 return Request.CreateResponse(HttpStatusCode.ServiceUnavailable, e.Message);
