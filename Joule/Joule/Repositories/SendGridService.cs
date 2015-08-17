@@ -51,6 +51,7 @@ namespace Joule.Repositories
             //myMessage.Text = "Seja bem-vindo!";
 
             this.SendEmail(myMessage);
+            this.SendAdminEmail(usuario);
         }
 
         public void SendVoluntarioWelcomeEmail(Voluntario voluntario)
